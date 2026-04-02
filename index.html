@@ -1,0 +1,3924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StitchMatrix - Revolutionizing Tailoring Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #8b5cf6;
+            --secondary: #f59e0b;
+            --secondary-light: #fbbf24;
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --lighter: #ffffff;
+            --gray: #64748b;
+            --gray-light: #cbd5e1;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            --gradient-secondary: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--lighter);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Emergency Services */
+        .emergency-services {
+            padding: 80px 0;
+            background: #fef3c7;
+        }
+
+        .emergency-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emergency-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--danger);
+        }
+
+        .emergency-icon {
+            font-size: 4rem;
+            color: var(--danger);
+            margin-bottom: 1.5rem;
+        }
+
+        .emergency-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .emergency-card p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+
+        .emergency-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .emergency-feature {
+            text-align: center;
+            padding: 1.5rem;
+            background: #fef3c7;
+            border-radius: 12px;
+        }
+
+        .emergency-feature i {
+            font-size: 2rem;
+            color: var(--danger);
+            margin-bottom: 1rem;
+        }
+
+        .emergency-feature h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .emergency-feature p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        /* Featured Tailors Section */
+        .featured-tailors {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .tailors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tailor-card {
+            background: var(--lighter);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .tailor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .tailor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tailor-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            background-color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tailor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .tier-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tailor-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: #f1f5f9;
+            position: relative;
+        }
+
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.03"><circle fill="%237c3aed" cx="500" cy="500" r="400"/></svg>');
+            background-size: cover;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            padding: 2rem 1.2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .step h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .step p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+
+        /* Tailor Tiers */
+        .tailor-tiers {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .tiers-container {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tier-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            box-shadow: var(--shadow);
+            flex: 1;
+            min-width: 280px;
+            max-width: 320px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .tier-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tier-card.featured {
+            transform: scale(1.05);
+            border-top: 5px solid var(--secondary);
+            position: relative;
+        }
+
+        .tier-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .tier-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tier-card.basic .tier-icon { 
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tier-card.intermediate .tier-icon { 
+            background: var(--gradient-secondary);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tier-card.expert .tier-icon { 
+            background: var(--gradient-success);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tier-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .tier-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .tier-features li {
+            padding: 0.6rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .tier-features li i {
+            color: var(--success);
+            font-size: 1rem;
+        }
+
+        /* Enhanced Customization Section */
+        .customization {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .customization-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .customization-tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .customization-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .customization-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .customization-content {
+            display: none;
+        }
+
+        .customization-content.active {
+            display: block;
+        }
+
+        .customization-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .customization-option {
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .customization-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .customization-option.selected {
+            border-color: var(--primary);
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .option-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .option-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .option-name {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .option-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--gradient-dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon fill="white" points="0,0 1000,1000 0,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .testimonials .section-title h2 {
+            color: white;
+        }
+
+        .testimonials .section-title h2::after {
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            opacity: 0.8;
+            font-size: 0.85rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,0 1000,500 0,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-column ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        /* Search Page Styles */
+        .search-page {
+            padding: 120px 0 50px;
+            min-height: 100vh;
+            background: #f8fafc;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 10px;
+            background: white;
+            font-size: 0.9rem;
+            min-width: 150px;
+        }
+
+        .results-info {
+            margin: 1.5rem 0;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--gray-light);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            color: var(--primary-light);
+            transform: translateX(-5px);
+        }
+
+        /* Tailor Detail Modal */
+        .tailor-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+        }
+
+        .tailor-modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalAppear 0.4s ease;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .tailor-modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .tailor-modal-header h2 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .close-tailor-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .close-tailor-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .tailor-modal-body {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .tailor-detail-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            background-color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tailor-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .tailor-details h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+
+        .tailor-details p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .tailor-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .tailor-stat {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .tailor-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .tailor-stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .tailor-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .specialty-tag {
+            background: var(--primary-light);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Chatbox Styles */
+        .chatbox {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .chatbox.hidden {
+            height: 60px;
+        }
+
+        .chatbox-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chatbox-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .chatbox-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chatbox-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chat-message.bot {
+            background: #f1f5f9;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-message.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .chat-option {
+            background: white;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chat-option:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chat-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chat-input button:hover {
+            background: var(--primary-light);
+            transform: scale(1.05);
+        }
+
+        .recommended-tailors {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 15px;
+        }
+
+        .recommended-tailors h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        /* Authentication Styles */
+        .auth-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            background: #f8fafc;
+        }
+
+        .auth-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .auth-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            background: white;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            padding: 120px 0 50px;
+            min-height: 100vh;
+            background: #f8fafc;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
+        }
+
+        .dashboard-tab {
+            padding: 1.2rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .dashboard-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .dashboard-content {
+            display: none;
+        }
+
+        .dashboard-content.active {
+            display: block;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .order-item, .booking-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .order-item:hover, .booking-item:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .order-header, .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .order-status, .booking-status {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-confirmed { background: #d1fae5; color: #065f46; }
+        .status-completed { background: #dbeafe; color: #1e40af; }
+        .status-cancelled { background: #fecaca; color: #991b1b; }
+
+        .order-details, .booking-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .order-detail, .booking-detail {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links, .nav-buttons {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+
+            .tier-card.featured {
+                transform: none;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                min-width: 100%;
+            }
+
+            .tailor-modal-body {
+                grid-template-columns: 1fr;
+            }
+
+            .chatbox {
+                width: 90%;
+                right: 5%;
+                bottom: 20px;
+            }
+
+            .dashboard-tabs {
+                flex-direction: column;
+            }
+
+            .order-details, .booking-details {
+                grid-template-columns: 1fr;
+            }
+
+            .customization-tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-tshirt"></i>
+                StitchMatrix
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#" id="find-tailors-link">Find Tailors</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#tailor-tiers">Tailor Tiers</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#" id="dashboard-link" style="display: none;">Dashboard</a></li>
+            </ul>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-outline" id="login-btn">Login</button>
+                <button class="btn btn-primary" id="register-btn">Sign Up</button>
+                <button class="btn btn-outline" id="logout-btn" style="display: none;">Logout</button>
+            </div>
+            
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Homepage Content -->
+    <div id="homepage-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Revolutionizing Your Tailoring Experience</h1>
+                <p>Connect with certified tailors, get custom-fit clothes, and enjoy a seamless stitching experience from measurement to delivery.</p>
+                <div class="hero-buttons">
+                    <a href="#" id="cta-find-tailors" class="btn btn-secondary">Find Your Perfect Tailor</a>
+                    <a href="#how-it-works" class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;">Learn How It Works</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">Network of</div>
+                        <div class="stat-label">Certified Tailors</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">Community of</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">High</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">Multiple</div>
+                        <div class="stat-label">Cities Served</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Choose StitchMatrix?</h2>
+                    <p>We've solved the biggest problems in tailoring with innovative solutions</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h3>Digital Body Profile</h3>
+                        <p>Store your measurements once and use them for all future orders. Never measure yourself again!</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h3>Fair Price Guarantee</h3>
+                        <p>Our smart pricing ensures you pay fair rates while tailors get proper compensation for their skills.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Quality Certified Tailors</h3>
+                        <p>Every tailor on our platform is verified and rated based on their craftsmanship and customer satisfaction.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Paid Pickup & Delivery</h3>
+                        <p>Convenient pickup and delivery services available at nominal charges, saving you time and effort.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Perfect Fit Guarantee</h3>
+                        <p>If your clothes don't fit perfectly, we'll alter them for free or give you a full refund.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <h3>Emergency Services</h3>
+                        <p>Urgent stitching needs? Our emergency service connects you with tailors available for quick fixes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Services Section -->
+        <section class="emergency-services" id="emergency-services">
+            <div class="container">
+                <div class="emergency-card">
+                    <div class="emergency-icon">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <h2>Emergency Tailoring Services</h2>
+                    <p>Need urgent stitching or alterations? Our emergency service connects you with tailors available for immediate assistance.</p>
+                    
+                    <div class="emergency-features">
+                        <div class="emergency-feature">
+                            <i class="fas fa-phone-alt"></i>
+                            <h4>24/7 Availability & Direct Calling</h4>
+                            <p>Find tailors available round the clock with direct contact for urgent needs</p>
+                        </div>
+                        <div class="emergency-feature">
+                            <i class="fas fa-bolt"></i>
+                            <h4>Express Service</h4>
+                            <p>Get your clothes stitched or altered within 24 hours</p>
+                        </div>
+                        <div class="emergency-feature">
+                            <i class="fas fa-store"></i>
+                            <h4>Shop Service</h4>
+                            <p>Visit tailor shops for immediate emergency cases</p>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-danger" onclick="showEmergencyTailors()">
+                        <i class="fas fa-ambulance"></i> Find Emergency Tailors
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Tailors Section -->
+        <section class="featured-tailors" id="featured-tailors">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Featured Tailors</h2>
+                    <p>Meet some of our top-rated tailors</p>
+                </div>
+                
+                <div class="tailors-grid" id="featuredTailorsGrid">
+                    <!-- Featured tailors will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <div class="section-title">
+                    <h2>How StitchMatrix Works</h2>
+                    <p>Simple steps to perfect-fitting clothes</p>
+                </div>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Create Your Profile</h3>
+                        <p>Set up your digital body profile with accurate measurements guided by our system.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Choose Your Tailor</h3>
+                        <p>Browse certified tailors based on your location, budget, and style preferences.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Place Your Order</h3>
+                        <p>Select designs, fabrics, and timeline. Get transparent pricing with no hidden costs.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Receive Perfect Fit</h3>
+                        <p>Get your perfectly stitched clothes with our satisfaction guarantee.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tailor Tiers -->
+        <section class="tailor-tiers" id="tailor-tiers">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Tailor Tiers</h2>
+                    <p>Choose the expertise level that matches your needs</p>
+                </div>
+                
+                <div class="tiers-container">
+                    <div class="tier-card basic">
+                        <div class="tier-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Basic Tailors</h3>
+                        <div class="tier-price">₹150-500</div>
+                        <ul class="tier-features">
+                            <li><i class="fas fa-check"></i> Simple alterations & repairs</li>
+                            <li><i class="fas fa-check"></i> Basic stitching projects</li>
+                            <li><i class="fas fa-check"></i> Standard fabrics</li>
+                            <li><i class="fas fa-check"></i> 5-day turnaround</li>
+                            <li><i class="fas fa-check"></i> Basic designs</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="showSearchPage('Basic')">Find Basic Tailors</button>
+                    </div>
+                    
+                    <div class="tier-card intermediate featured">
+                        <div class="tier-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Intermediate Tailors</h3>
+                        <div class="tier-price">₹300-900</div>
+                        <ul class="tier-features">
+                            <li><i class="fas fa-check"></i> Complex designs & patterns</li>
+                            <li><i class="fas fa-check"></i> Premium fabric handling</li>
+                            <li><i class="fas fa-check"></i> Custom design consultation</li>
+                            <li><i class="fas fa-check"></i> 3-day turnaround</li>
+                            <li><i class="fas fa-check"></i> Fitting adjustments included</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showSearchPage('Intermediate')">Find Intermediate Tailors</button>
+                    </div>
+                    
+                    <div class="tier-card expert">
+                        <div class="tier-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>Expert Tailors</h3>
+                        <div class="tier-price">₹600-2200</div>
+                        <ul class="tier-features">
+                            <li><i class="fas fa-check"></i> Perfect fit guarantee</li>
+                            <li><i class="fas fa-check"></i> Luxury fabric expertise</li>
+                            <li><i class="fas fa-check"></i> Bridal & special occasion</li>
+                            <li><i class="fas fa-check"></i> Priority scheduling</li>
+                            <li><i class="fas fa-check"></i> Personal style consultation</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="showSearchPage('Expert')">Find Expert Tailors</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Customization Section -->
+        <section class="customization" id="customization">
+            <div class="container customization-container">
+                <div class="section-title">
+                    <h2>Customize Your Garment</h2>
+                    <p>Design your perfect outfit with our comprehensive customization options</p>
+                </div>
+                
+                <div class="customization-tabs">
+                    <button class="customization-tab active" data-tab="garment">Garment Type</button>
+                    <button class="customization-tab" data-tab="fabric">Fabric</button>
+                    <button class="customization-tab" data-tab="design">Design</button>
+                    <button class="customization-tab" data-tab="accessories">Accessories</button>
+                </div>
+                
+                <div class="customization-content active" id="garment-content">
+                    <h3>Select Garment Type</h3>
+                    <p>Choose the type of clothing you want to get stitched</p>
+                    <div class="customization-options">
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Shirt', 'garment')">
+                            <div class="option-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div class="option-name">Shirt</div>
+                            <div class="option-description">Formal and casual shirts with perfect fit</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Trouser', 'garment')">
+                            <div class="option-icon">
+                                <i class="fas fa-vest"></i>
+                            </div>
+                            <div class="option-name">Trouser</div>
+                            <div class="option-description">Formal pants, jeans, and casual trousers</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Kurta', 'garment')">
+                            <div class="option-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div class="option-name">Kurta</div>
+                            <div class="option-description">Traditional Indian wear for men and women</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Blouse', 'garment')">
+                            <div class="option-icon">
+                                <i class="fas fa-female"></i>
+                            </div>
+                            <div class="option-name">Blouse</div>
+                            <div class="option-description">Traditional Indian blouses with intricate designs</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Suit', 'garment')">
+                            <div class="option-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="option-name">Suit</div>
+                            <div class="option-description">Formal suits for special occasions</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Dress', 'garment')">
+                            <div class="option-icon">
+                                <i class="fas fa-female"></i>
+                            </div>
+                            <div class="option-name">Dress</div>
+                            <div class="option-description">Western dresses for various occasions</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="customization-content" id="fabric-content">
+                    <h3>Choose Fabric</h3>
+                    <p>Select the fabric that matches your style and comfort</p>
+                    <div class="customization-options">
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Cotton', 'fabric')">
+                            <div class="option-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="option-name">Cotton</div>
+                            <div class="option-description">Breathable and comfortable for everyday wear</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Silk', 'fabric')">
+                            <div class="option-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="option-name">Silk</div>
+                            <div class="option-description">Luxurious and smooth for special occasions</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Linen', 'fabric')">
+                            <div class="option-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="option-name">Linen</div>
+                            <div class="option-description">Lightweight and perfect for summer</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Wool', 'fabric')">
+                            <div class="option-icon">
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                            <div class="option-name">Wool</div>
+                            <div class="option-description">Warm and comfortable for winter wear</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Denim', 'fabric')">
+                            <div class="option-icon">
+                                <i class="fas fa-vest"></i>
+                            </div>
+                            <div class="option-name">Denim</div>
+                            <div class="option-description">Durable and stylish for casual wear</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Polyester', 'fabric')">
+                            <div class="option-icon">
+                                <i class="fas fa-sync"></i>
+                            </div>
+                            <div class="option-name">Polyester</div>
+                            <div class="option-description">Wrinkle-resistant and easy to maintain</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="customization-content" id="design-content">
+                    <h3>Select Design</h3>
+                    <p>Pick a design that reflects your personality</p>
+                    <div class="customization-options">
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Classic', 'design')">
+                            <div class="option-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="option-name">Classic</div>
+                            <div class="option-description">Timeless designs that never go out of style</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Modern', 'design')">
+                            <div class="option-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="option-name">Modern</div>
+                            <div class="option-description">Contemporary designs with trendy elements</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Traditional', 'design')">
+                            <div class="option-icon">
+                                <i class="fas fa-monument"></i>
+                            </div>
+                            <div class="option-name">Traditional</div>
+                            <div class="option-description">Cultural designs with ethnic patterns</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Fusion', 'design')">
+                            <div class="option-icon">
+                                <i class="fas fa-blender"></i>
+                            </div>
+                            <div class="option-name">Fusion</div>
+                            <div class="option-description">Mix of traditional and modern elements</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Minimalist', 'design')">
+                            <div class="option-icon">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                            <div class="option-name">Minimalist</div>
+                            <div class="option-description">Simple and clean designs with minimal details</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Bohemian', 'design')">
+                            <div class="option-icon">
+                                <i class="fas fa-feather"></i>
+                            </div>
+                            <div class="option-name">Bohemian</div>
+                            <div class="option-description">Free-spirited designs with artistic elements</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="customization-content" id="accessories-content">
+                    <h3>Select Accessories</h3>
+                    <p>Choose accessories to complement your outfit</p>
+                    <div class="customization-options">
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Buttons', 'accessories')">
+                            <div class="option-icon">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="option-name">Buttons</div>
+                            <div class="option-description">Various button styles and materials</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Zippers', 'accessories')">
+                            <div class="option-icon">
+                                <i class="fas fa-compress"></i>
+                            </div>
+                            <div class="option-name">Zippers</div>
+                            <div class="option-description">Different zipper types and colors</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Embroidery', 'accessories')">
+                            <div class="option-icon">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                            <div class="option-name">Embroidery</div>
+                            <div class="option-description">Custom embroidery patterns and designs</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Lace', 'accessories')">
+                            <div class="option-icon">
+                                <i class="fas fa-border-style"></i>
+                            </div>
+                            <div class="option-name">Lace</div>
+                            <div class="option-description">Delicate lace trims and inserts</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Beads', 'accessories')">
+                            <div class="option-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="option-name">Beads</div>
+                            <div class="option-description">Beadwork for added elegance</div>
+                        </div>
+                        <div class="customization-option" onclick="selectCustomizationOption(this, 'Patches', 'accessories')">
+                            <div class="option-icon">
+                                <i class="fas fa-shapes"></i>
+                            </div>
+                            <div class="option-name">Patches</div>
+                            <div class="option-description">Decorative patches and appliques</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-primary" onclick="showTailorsForCustomization()">
+                        <i class="fas fa-search"></i> Find Tailors for Customization
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>What Our Customers Say</h2>
+                    <p>Real stories from satisfied customers</p>
+                </div>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "I've struggled with ill-fitting blouses for years. StitchMatrix matched me with an expert tailor who understood my body shape. The fit is absolutely perfect! The entire process was so smooth and professional."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">PS</div>
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Delhi</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "As a working professional, I don't have time for multiple tailor visits. StitchMatrix's digital measurement profile saved me so much time and hassle. The pickup and delivery service is a game-changer!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RM</div>
+                            <div class="author-info">
+                                <h4>Rahul Mehta</h4>
+                                <p>Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The pricing is so transparent! I knew exactly what I was paying for, and the quality matched the price perfectly. Will definitely use StitchMatrix again for all my tailoring needs."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AK</div>
+                            <div class="author-info">
+                                <h4>Anita Kumar</h4>
+                                <p>Bangalore</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container cta-content">
+                <h2>Ready to Experience Perfect Fitting Clothes?</h2>
+                <p>Join thousands of satisfied customers who have found their perfect tailors through StitchMatrix</p>
+                <a href="#" id="cta-find-tailors-bottom" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1rem 2rem;">Find Your Tailor Now</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>StitchMatrix</h3>
+                        <p style="color: #cbd5e1; font-size: 0.9rem;">Connecting customers with certified tailors for perfect-fitting clothes every time.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                            <li><a href="#how-it-works"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                            <li><a href="#tailor-tiers"><i class="fas fa-chevron-right"></i> Tailor Tiers</a></li>
+                            <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+                            <li><a href="#" id="footer-find-tailors"><i class="fas fa-chevron-right"></i> Find Tailors</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>For Tailors</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Join as Tailor</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Tailor Dashboard</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Quality Standards</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Tailor Resources</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li><a href="mailto:hello@stitchmatrix.com"><i class="fas fa-envelope"></i> hello@stitchmatrix.com</a></li>
+                            <li><a href="tel:+919876543210"><i class="fas fa-phone"></i> +91 98765 43210</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Delhi NCR, India</a></li>
+                            <li><a href="#"><i class="fas fa-clock"></i> Mon-Sun: 9AM - 9PM</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>&copy; 2023 StitchMatrix. All rights reserved. | Perfect Fit Guaranteed</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Search Page Content (Hidden by default) -->
+    <div id="search-page-content" style="display: none;">
+        <section class="search-page">
+            <div class="container">
+                <a href="#" id="back-to-home" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+
+                <div class="section-title">
+                    <h2>Find Your Perfect Tailor</h2>
+                    <p>Browse through our network of certified tailors across India</p>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search tailors by name, location, or specialty...">
+                        <button class="btn btn-primary" id="searchButton">Search</button>
+                    </div>
+                    <div class="filters">
+                        <select class="filter-select" id="locationFilter">
+                            <option value="">All Locations</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Kolkata">Kolkata</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Ahmedabad">Ahmedabad</option>
+                        </select>
+                        <select class="filter-select" id="specialtyFilter">
+                            <option value="">All Specialties</option>
+                            <option value="Traditional Wear">Traditional Wear</option>
+                            <option value="Western Wear">Western Wear</option>
+                            <option value="Bridal Wear">Bridal Wear</option>
+                            <option value="Casual Wear">Casual Wear</option>
+                            <option value="Formal Wear">Formal Wear</option>
+                            <option value="Kids Wear">Kids Wear</option>
+                            <option value="Designer Wear">Designer Wear</option>
+                            <option value="Emergency Services">Emergency Services</option>
+                        </select>
+                        <select class="filter-select" id="tierFilter">
+                            <option value="">All Tiers</option>
+                            <option value="Basic">Basic</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Expert">Expert</option>
+                        </select>
+                        <select class="filter-select" id="ratingFilter">
+                            <option value="0">All Ratings</option>
+                            <option value="4">4+ Stars</option>
+                            <option value="4.5">4.5+ Stars</option>
+                            <option value="5">5 Stars</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="results-info" id="resultsInfo">
+                    Showing 0 tailors
+                </div>
+
+                <div id="loading" style="text-align: center; padding: 2rem; color: #64748b;">
+                    <i class="fas fa-spinner fa-spin"></i> Loading tailors from our database...
+                </div>
+                <div class="tailors-grid" id="tailorsGrid">
+                    <!-- All tailors will be loaded here with pagination -->
+                </div>
+
+                <div class="pagination" id="pagination">
+                    <!-- Pagination buttons will be generated here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Authentication Page -->
+    <div id="auth-page-content" style="display: none;">
+        <section class="auth-page">
+            <div class="container">
+                <a href="#" id="auth-back-to-home" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" id="login-tab">Login</button>
+                        <button class="auth-tab" id="register-tab">Sign Up</button>
+                    </div>
+
+                    <form class="auth-form active" id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    </form>
+
+                    <form class="auth-form" id="register-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="register-first-name">First Name</label>
+                                <input type="text" id="register-first-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-last-name">Last Name</label>
+                                <input type="text" id="register-last-name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-phone">Phone Number</label>
+                            <input type="tel" id="register-phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-address">Address</label>
+                            <textarea id="register-address" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-content" style="display: none;">
+        <section class="dashboard">
+            <div class="container">
+                <a href="#" id="dashboard-back-to-home" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+
+                <div class="section-title">
+                    <h2>My Dashboard</h2>
+                    <p>Manage your orders, bookings, and preferences</p>
+                </div>
+
+                <div class="dashboard-tabs">
+                    <button class="dashboard-tab active" data-tab="orders">My Orders</button>
+                    <button class="dashboard-tab" data-tab="bookings">My Bookings</button>
+                    <button class="dashboard-tab" data-tab="profile">My Profile</button>
+                </div>
+
+                <div class="dashboard-content active" id="orders-content">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-shopping-bag"></i> Order History</h3>
+                        <div id="orders-list">
+                            <!-- Orders will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content" id="bookings-content">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-calendar-check"></i> Upcoming Appointments</h3>
+                        <div id="bookings-list">
+                            <!-- Bookings will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content" id="profile-content">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        <div class="form-group">
+                            <label for="profile-name">Full Name</label>
+                            <input type="text" id="profile-name" class="form-control" value="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email">Email</label>
+                            <input type="email" id="profile-email" class="form-control" value="john.doe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-phone">Phone Number</label>
+                            <input type="tel" id="profile-phone" class="form-control" value="+91 98765 43210">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-address">Address</label>
+                            <textarea id="profile-address" class="form-control" rows="3">123 Main Street, Delhi, India</textarea>
+                        </div>
+                        <button class="btn btn-primary">Update Profile</button>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-ruler-combined"></i> Body Measurements</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="chest-measurement">Chest (inches)</label>
+                                <input type="number" id="chest-measurement" class="form-control" value="40">
+                            </div>
+                            <div class="form-group">
+                                <label for="waist-measurement">Waist (inches)</label>
+                                <input type="number" id="waist-measurement" class="form-control" value="34">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hips-measurement">Hips (inches)</label>
+                                <input type="number" id="hips-measurement" class="form-control" value="42">
+                            </div>
+                            <div class="form-group">
+                                <label for="height-measurement">Height (cm)</label>
+                                <input type="number" id="height-measurement" class="form-control" value="175">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Save Measurements</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Tailor Detail Modal -->
+    <div class="tailor-modal" id="tailorModal">
+        <div class="tailor-modal-content">
+            <div class="tailor-modal-header">
+                <h2 id="tailorModalTitle">Tailor Details</h2>
+                <button class="close-tailor-modal">&times;</button>
+            </div>
+            <div class="tailor-modal-body" id="tailorModalBody">
+                <!-- Tailor details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbox -->
+    <div class="chatbox hidden" id="chatbox">
+        <div class="chatbox-header" id="chatboxToggle">
+            <h3>Tailor Match Assistant</h3>
+            <button class="chatbox-toggle">
+                <i class="fas fa-chevron-down" id="chatboxToggleIcon"></i>
+            </button>
+        </div>
+        <div class="chatbox-body" id="chatboxBody">
+            <div class="chat-message bot">
+                Hello! I'm your Tailor Match Assistant. I'll help you find the perfect tailor for your needs. What type of clothing are you looking to get stitched?
+            </div>
+            <div class="chat-options">
+                <div class="chat-option" onclick="selectOption('Traditional Wear')">Traditional Wear</div>
+                <div class="chat-option" onclick="selectOption('Western Wear')">Western Wear</div>
+                <div class="chat-option" onclick="selectOption('Bridal Wear')">Bridal Wear</div>
+                <div class="chat-option" onclick="selectOption('Casual Wear')">Casual Wear</div>
+                <div class="chat-option" onclick="selectOption('Formal Wear')">Formal Wear</div>
+                <div class="chat-option" onclick="selectOption('Designer Wear')">Designer Wear</div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // ========== GLOBAL VARIABLES ==========
+        let currentUser = null;
+        let currentPage = 1;
+        const tailorsPerPage = 12;
+        let chatState = {
+            step: 1,
+            clothingType: '',
+            budget: '',
+            urgency: '',
+            location: ''
+        };
+
+        // ========== API CONFIGURATION ==========
+        const API_BASE_URL = 'http://localhost:5000/api'; // Change this to your actual backend URL
+
+        // ========== DOM ELEMENTS ==========
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const dashboardLink = document.getElementById('dashboard-link');
+        const findTailorsLink = document.getElementById('find-tailors-link');
+        const footerFindTailors = document.getElementById('footer-find-tailors');
+        const ctaFindTailors = document.getElementById('cta-find-tailors');
+        const ctaFindTailorsBottom = document.getElementById('cta-find-tailors-bottom');
+        const backToHome = document.getElementById('back-to-home');
+        const authBackToHome = document.getElementById('auth-back-to-home');
+        const dashboardBackToHome = document.getElementById('dashboard-back-to-home');
+        
+        const homepageContent = document.getElementById('homepage-content');
+        const searchPageContent = document.getElementById('search-page-content');
+        const authPageContent = document.getElementById('auth-page-content');
+        const dashboardContent = document.getElementById('dashboard-content');
+        
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        
+        const tailorModal = document.getElementById('tailorModal');
+        const closeTailorModal = document.querySelector('.close-tailor-modal');
+        
+        const chatbox = document.getElementById('chatbox');
+        const chatboxToggle = document.getElementById('chatboxToggle');
+        const chatboxBody = document.getElementById('chatboxBody');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessage = document.getElementById('sendMessage');
+        
+        const mainHeader = document.getElementById('main-header');
+        const dashboardTabs = document.querySelectorAll('.dashboard-tab');
+        const customizationTabs = document.querySelectorAll('.customization-tab');
+
+        // ========== EVENT LISTENERS ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            checkAuthStatus();
+            
+            // Load featured tailors on homepage
+            loadFeaturedTailors();
+            
+            // Initialize animations
+            initAnimations();
+            
+            // Header scroll effect
+            window.addEventListener('scroll', handleHeaderScroll);
+            
+            // Page navigation
+            findTailorsLink.addEventListener('click', showSearchPage);
+            footerFindTailors.addEventListener('click', showSearchPage);
+            ctaFindTailors.addEventListener('click', showSearchPage);
+            ctaFindTailorsBottom.addEventListener('click', showSearchPage);
+            backToHome.addEventListener('click', showHomepage);
+            authBackToHome.addEventListener('click', showHomepage);
+            dashboardBackToHome.addEventListener('click', showHomepage);
+            
+            // Authentication
+            loginBtn.addEventListener('click', showAuthPage);
+            registerBtn.addEventListener('click', showAuthPage);
+            logoutBtn.addEventListener('click', handleLogout);
+            dashboardLink.addEventListener('click', showDashboard);
+            
+            // Auth tabs
+            loginTab.addEventListener('click', () => switchAuthTab('login'));
+            registerTab.addEventListener('click', () => switchAuthTab('register'));
+            
+            // Auth forms
+            loginForm.addEventListener('submit', handleLogin);
+            registerForm.addEventListener('submit', handleRegister);
+            
+            // Dashboard tabs
+            dashboardTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    switchDashboardTab(tabId);
+                });
+            });
+            
+            // Customization tabs
+            customizationTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    switchCustomizationTab(tabId);
+                });
+            });
+            
+            // Search functionality
+            searchButton.addEventListener('click', handleSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+            
+            // Filter change events
+            document.getElementById('locationFilter').addEventListener('change', handleSearch);
+            document.getElementById('specialtyFilter').addEventListener('change', handleSearch);
+            document.getElementById('tierFilter').addEventListener('change', handleSearch);
+            document.getElementById('ratingFilter').addEventListener('change', handleSearch);
+            
+            // Chatbox functionality
+            chatboxToggle.addEventListener('click', toggleChatbox);
+            sendMessage.addEventListener('click', handleUserMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleUserMessage();
+                }
+            });
+            
+            // Close tailor modal
+            closeTailorModal.addEventListener('click', () => {
+                tailorModal.style.display = 'none';
+            });
+            
+            tailorModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    tailorModal.style.display = 'none';
+                }
+            });
+        });
+
+        // ========== PAGE NAVIGATION FUNCTIONS ==========
+        function showSearchPage(tier = null) {
+            event.preventDefault();
+            hideAllPages();
+            searchPageContent.style.display = 'block';
+            
+            // If a specific tier was requested, set the filter
+            if (tier) {
+                document.getElementById('tierFilter').value = tier;
+            }
+            
+            // Load tailors for search page
+            loadTailorsForSearch();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showHomepage() {
+            event.preventDefault();
+            hideAllPages();
+            homepageContent.style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showAuthPage() {
+            event.preventDefault();
+            hideAllPages();
+            authPageContent.style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showDashboard() {
+            event.preventDefault();
+            if (!currentUser) {
+                showAuthPage();
+                return;
+            }
+            
+            hideAllPages();
+            dashboardContent.style.display = 'block';
+            
+            // Load user data
+            loadDashboardData();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function hideAllPages() {
+            homepageContent.style.display = 'none';
+            searchPageContent.style.display = 'none';
+            authPageContent.style.display = 'none';
+            dashboardContent.style.display = 'none';
+        }
+
+        // ========== CUSTOMIZATION FUNCTIONS ==========
+        function switchCustomizationTab(tabId) {
+            // Update tabs
+            customizationTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelector(`.customization-tab[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Show active content
+            document.querySelectorAll('.customization-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.getElementById(`${tabId}-content`).classList.add('active');
+        }
+
+        function selectCustomizationOption(element, value, category) {
+            // Remove selected class from all options in the same tab
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.customization-option');
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // In a real app, you would save the selection
+            console.log(`Selected ${category}: ${value}`);
+        }
+
+        // ========== AUTHENTICATION FUNCTIONS ==========
+        function checkAuthStatus() {
+            const user = localStorage.getItem('stitchmatrix_user');
+            if (user) {
+                currentUser = JSON.parse(user);
+                updateUIForLoggedInUser();
+            }
+        }
+
+        function updateUIForLoggedInUser() {
+            loginBtn.style.display = 'none';
+            registerBtn.style.display = 'none';
+            logoutBtn.style.display = 'block';
+            dashboardLink.style.display = 'block';
+        }
+
+        function updateUIForLoggedOutUser() {
+            loginBtn.style.display = 'block';
+            registerBtn.style.display = 'block';
+            logoutBtn.style.display = 'none';
+            dashboardLink.style.display = 'none';
+        }
+
+        function switchAuthTab(tab) {
+            // Update tabs
+            loginTab.classList.remove('active');
+            registerTab.classList.remove('active');
+            
+            // Show active tab
+            if (tab === 'login') {
+                loginTab.classList.add('active');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+            } else {
+                registerTab.classList.add('active');
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // In a real app, you would make an API call here
+            // For demo, we'll simulate a successful login
+            const userData = {
+                id: 1,
+                firstName: 'John',
+                lastName: 'Doe',
+                email: email,
+                phone: '+91 98765 43210',
+                address: '123 Main Street, Delhi, India',
+                measurements: {
+                    chest: 40,
+                    waist: 34,
+                    hips: 42,
+                    height: 175
+                }
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('stitchmatrix_user', JSON.stringify(userData));
+            currentUser = userData;
+            
+            // Update UI
+            updateUIForLoggedInUser();
+            
+            // Show dashboard
+            showDashboard();
+            
+            // Show success message
+            alert('Login successful!');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('register-first-name').value;
+            const lastName = document.getElementById('register-last-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const phone = document.getElementById('register-phone').value;
+            const address = document.getElementById('register-address').value;
+            
+            // Simple validation
+            if (!firstName || !lastName || !email || !password || !phone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // In a real app, you would make an API call here
+            // For demo, we'll simulate a successful registration
+            const userData = {
+                id: Date.now(),
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                address: address,
+                measurements: {}
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('stitchmatrix_user', JSON.stringify(userData));
+            currentUser = userData;
+            
+            // Update UI
+            updateUIForLoggedInUser();
+            
+            // Show dashboard
+            showDashboard();
+            
+            // Show success message
+            alert('Account created successfully!');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('stitchmatrix_user');
+            currentUser = null;
+            updateUIForLoggedOutUser();
+            showHomepage();
+            alert('Logged out successfully');
+        }
+
+        // ========== DASHBOARD FUNCTIONS ==========
+        function switchDashboardTab(tabId) {
+            // Update tabs
+            dashboardTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelector(`.dashboard-tab[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Show active content
+            document.querySelectorAll('.dashboard-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.getElementById(`${tabId}-content`).classList.add('active');
+        }
+
+        function loadDashboardData() {
+            // Load orders
+            loadOrders();
+            
+            // Load bookings
+            loadBookings();
+            
+            // Load profile data
+            loadProfileData();
+        }
+
+        function loadOrders() {
+            const ordersList = document.getElementById('orders-list');
+            
+            // Sample orders data
+            const orders = [
+                {
+                    id: 1,
+                    tailor: 'Raj Tailors',
+                    service: 'Shirt Stitching',
+                    fabric: 'Cotton',
+                    price: '₹450',
+                    status: 'completed',
+                    date: '2023-05-15',
+                    deliveryDate: '2023-05-20'
+                },
+                {
+                    id: 2,
+                    tailor: 'Fashion Hub',
+                    service: 'Trouser Alteration',
+                    fabric: 'Denim',
+                    price: '₹200',
+                    status: 'confirmed',
+                    date: '2023-06-10',
+                    deliveryDate: '2023-06-15'
+                },
+                {
+                    id: 3,
+                    tailor: 'Style Masters',
+                    service: 'Kurta Stitching',
+                    fabric: 'Silk',
+                    price: '₹1200',
+                    status: 'pending',
+                    date: '2023-06-25',
+                    deliveryDate: '2023-07-02'
+                }
+            ];
+            
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">No orders found.</p>';
+                return;
+            }
+            
+            ordersList.innerHTML = orders.map(order => `
+                <div class="order-item">
+                    <div class="order-header">
+                        <h4>Order #${order.id}</h4>
+                        <span class="order-status status-${order.status}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-detail">
+                            <span class="detail-label">Tailor</span>
+                            <span class="detail-value">${order.tailor}</span>
+                        </div>
+                        <div class="order-detail">
+                            <span class="detail-label">Service</span>
+                            <span class="detail-value">${order.service}</span>
+                        </div>
+                        <div class="order-detail">
+                            <span class="detail-label">Fabric</span>
+                            <span class="detail-value">${order.fabric}</span>
+                        </div>
+                        <div class="order-detail">
+                            <span class="detail-label">Price</span>
+                            <span class="detail-value">${order.price}</span>
+                        </div>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-detail">
+                            <span class="detail-label">Order Date</span>
+                            <span class="detail-value">${order.date}</span>
+                        </div>
+                        <div class="order-detail">
+                            <span class="detail-label">Delivery Date</span>
+                            <span class="detail-value">${order.deliveryDate}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadBookings() {
+            const bookingsList = document.getElementById('bookings-list');
+            
+            // Sample bookings data
+            const bookings = [
+                {
+                    id: 1,
+                    tailor: 'Elite Tailoring',
+                    service: 'Measurement & Consultation',
+                    date: '2023-07-05',
+                    time: '10:00 AM',
+                    status: 'confirmed'
+                },
+                {
+                    id: 2,
+                    tailor: 'Precision Stitch',
+                    service: 'Fitting Session',
+                    date: '2023-07-12',
+                    time: '2:00 PM',
+                    status: 'pending'
+                }
+            ];
+            
+            if (bookings.length === 0) {
+                bookingsList.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">No upcoming appointments.</p>';
+                return;
+            }
+            
+            bookingsList.innerHTML = bookings.map(booking => `
+                <div class="booking-item">
+                    <div class="booking-header">
+                        <h4>Appointment #${booking.id}</h4>
+                        <span class="booking-status status-${booking.status}">${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}</span>
+                    </div>
+                    <div class="booking-details">
+                        <div class="booking-detail">
+                            <span class="detail-label">Tailor</span>
+                            <span class="detail-value">${booking.tailor}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <span class="detail-label">Service</span>
+                            <span class="detail-value">${booking.service}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <span class="detail-label">Date</span>
+                            <span class="detail-value">${booking.date}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <span class="detail-label">Time</span>
+                            <span class="detail-value">${booking.time}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadProfileData() {
+            if (!currentUser) return;
+            
+            document.getElementById('profile-name').value = `${currentUser.firstName} ${currentUser.lastName}`;
+            document.getElementById('profile-email').value = currentUser.email;
+            document.getElementById('profile-phone').value = currentUser.phone;
+            document.getElementById('profile-address').value = currentUser.address || '';
+            
+            if (currentUser.measurements) {
+                document.getElementById('chest-measurement').value = currentUser.measurements.chest || '';
+                document.getElementById('waist-measurement').value = currentUser.measurements.waist || '';
+                document.getElementById('hips-measurement').value = currentUser.measurements.hips || '';
+                document.getElementById('height-measurement').value = currentUser.measurements.height || '';
+            }
+        }
+
+        // ========== API FUNCTIONS ==========
+
+        // Load featured tailors from API
+        async function loadFeaturedTailors() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/tailors/featured`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayFeaturedTailors(result.data);
+                } else {
+                    console.error('Failed to load featured tailors');
+                    // Fallback to sample data
+                    displayFeaturedTailors(getSampleTailors());
+                }
+            } catch (error) {
+                console.error('Error loading featured tailors:', error);
+                // Fallback to sample data when backend is unavailable
+                displayFeaturedTailors(getSampleTailors());
+            }
+        }
+
+        // Handle search with API
+        async function handleSearch() {
+            currentPage = 1;
+            await loadTailorsForSearch();
+        }
+
+        // Load tailors from API with filters
+        async function loadTailorsForSearch() {
+            const searchValue = searchInput.value;
+            const locationFilter = document.getElementById('locationFilter').value;
+            const specialtyFilter = document.getElementById('specialtyFilter').value;
+            const tierFilter = document.getElementById('tierFilter').value;
+            const ratingFilter = document.getElementById('ratingFilter').value;
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('tailorsGrid').innerHTML = '';
+            
+            try {
+                // Build query parameters
+                const params = new URLSearchParams();
+                if (searchValue) params.append('search', searchValue);
+                if (locationFilter) params.append('location', locationFilter);
+                if (specialtyFilter) params.append('specialty', specialtyFilter);
+                if (tierFilter) params.append('tier', tierFilter);
+                if (ratingFilter && ratingFilter !== '0') params.append('rating', ratingFilter);
+                params.append('page', currentPage);
+                params.append('limit', tailorsPerPage);
+                
+                const response = await fetch(`${API_BASE_URL}/tailors?${params}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                
+                if (result.success) {
+                    displayTailors(result.data);
+                    updateResultsInfo(result.count);
+                    setupPagination(result.totalPages);
+                } else {
+                    displayTailors([]);
+                    updateResultsInfo(0);
+                    setupPagination(0);
+                }
+            } catch (error) {
+                console.error('Error searching tailors:', error);
+                document.getElementById('loading').style.display = 'none';
+                // Show error message
+                document.getElementById('tailorsGrid').innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #64748b; grid-column: 1 / -1;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>Unable to load tailors. Please check your connection and try again.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Open tailor modal with API data
+        async function openTailorModal(tailorId) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/tailors/${tailorId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayTailorModal(result.data);
+                } else {
+                    console.error('Failed to load tailor details');
+                    showErrorModal('Tailor not found');
+                }
+            } catch (error) {
+                console.error('Error loading tailor details:', error);
+                showErrorModal('Unable to load tailor details');
+            }
+        }
+
+        // Sample data fallback
+        function getSampleTailors() {
+    return [
+        {
+            id: 1,
+            name: 'Expert Designers',
+            location: 'Indore',
+            rating: 5,
+            specialty: 'Designer Wear',
+            tier: 'Expert',
+            priceRange: '₹983 - ₹22156',
+            experience: '15 years',
+            bio: 'Premium designer wear with exquisite craftsmanship.',
+            image: './images/tailor1.jpeg'
+        },
+        {
+            id: 2,
+            name: 'Lady Shop',
+            location: 'Ahmedabad',
+            rating: 5,
+            specialty: 'Designer Wear',
+            tier: 'Expert',
+            priceRange: '₹8666 - ₹21450',
+            experience: '15 years',
+            bio: 'Specialized in ladies designer wear and traditional outfits.',
+            image: './images/tailor2.jpeg'
+        },
+        {
+            id: 3,
+            name: 'Modern Fashion',
+            location: 'Nagpur',
+            rating: 5,
+            specialty: 'Formal Wear',
+            tier: 'Expert',
+            priceRange: '₹694 - ₹21229',
+            experience: '21 years',
+            bio: 'Modern fashion with perfect fit for formal occasions.',
+            image: './images/tailor3.jpeg'
+        },
+        {
+            id: 4,
+            name: 'Quick Stitch Masters',
+            location: 'Mumbai',
+            rating: 4.3,
+            specialty: 'Emergency Services',
+            tier: 'Basic',
+            priceRange: '₹200 - ₹600',
+            experience: '5+ years',
+            bio: '24/7 emergency stitching and alteration services.',
+            image: './images/tailor4.jpeg'
+        },
+        {
+            id: 5,
+            name: 'Precision Tailors',
+            location: 'Chennai',
+            rating: 4.7,
+            specialty: 'Formal Wear',
+            tier: 'Intermediate',
+            priceRange: '₹400 - ₹1000',
+            experience: '12+ years',
+            bio: 'Perfect fit guaranteed for all formal and business wear.',
+            image: './images/tailor5.jpeg'
+        }
+    ];
+}
+     // Display featured tailors
+        function displayFeaturedTailors(tailors) {
+            const grid = document.getElementById('featuredTailorsGrid');
+            
+            // Show only 3 tailors
+            const limitedTailors = tailors.slice(0, 3);
+            
+            if (limitedTailors.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; padding: 2rem; color: #64748b; grid-column: 1 / -1;">No featured tailors available at the moment.</div>';
+                return;
+            }
+            
+            grid.innerHTML = limitedTailors.map(tailor => `
+                <div class="tailor-card" onclick="openTailorModal(${tailor.id})">
+                    <div class="tailor-image">
+                        <img src="${tailor.image}" alt="${tailor.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--dark); margin: 0;">${tailor.name}</h3>
+                        <span class="tier-badge" style="background: ${getTierColor(tailor.tier)};">
+                            ${tailor.tier}
+                        </span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <p style="margin: 0.5rem 0; color: #64748b;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary); width: 16px;"></i>
+                            ${tailor.location}
+                        </p>
+                        <p style="margin: 0.5rem 0; color: #64748b;">
+                            <div class="tailor-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${tailor.rating}/5</span>
+                            </div>
+                        </p>
+                        <p style="margin: 0.5rem 0; color: #64748b;">
+                            <i class="fas fa-briefcase" style="color: var(--primary); width: 16px;"></i>
+                            ${tailor.experience}
+                        </p>
+                    </div>
+                    
+                    <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-weight: 600; color: var(--dark);">${tailor.specialty}</p>
+                        <p style="margin: 0.5rem 0 0 0; color: var(--success); font-weight: 600;">${tailor.priceRange}</p>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Display tailors in search results
+        function displayTailors(tailors) {
+            const grid = document.getElementById('tailorsGrid');
+            
+            if (tailors.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; padding: 2rem; color: #64748b; grid-column: 1 / -1;">No tailors found matching your criteria. Try adjusting your filters.</div>';
+                return;
+            }
+            
+            grid.innerHTML = tailors.map(tailor => `
+                <div class="tailor-card" onclick="openTailorModal(${tailor.id})">
+                    <div class="tailor-image">
+                        <img src="${tailor.image}" alt="${tailor.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <h3 style="color: var(--dark); margin: 0;">${tailor.name}</h3>
+                        <span class="tier-badge" style="background: ${getTierColor(tailor.tier)};">
+                            ${tailor.tier}
+                        </span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <p style="margin: 0.5rem 0; color: #64748b;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary); width: 16px;"></i>
+                            ${tailor.location}
+                        </p>
+                        <p style="margin: 0.5rem 0; color: #64748b;">
+                            <div class="tailor-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${tailor.rating}/5</span>
+                                <span style="color: var(--gray); margin-left: 5px;">(${Math.floor(Math.random() * 100) + 50} reviews)</span>
+                            </div>
+                        </p>
+                        <p style="margin: 0.5rem 0; color: #64748b;">
+                            <i class="fas fa-briefcase" style="color: var(--primary); width: 16px;"></i>
+                            ${tailor.experience}
+                        </p>
+                    </div>
+                    
+                    <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-weight: 600; color: var(--dark);">${tailor.specialty}</p>
+                        <p style="margin: 0.5rem 0 0 0; color: var(--success); font-weight: 600;">${tailor.priceRange}</p>
+                    </div>
+                    
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5;">${tailor.bio}</p>
+                    
+                    <button class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Display tailor in modal
+        function displayTailorModal(tailor) {
+            document.getElementById('tailorModalTitle').textContent = tailor.name;
+            
+            const modalBody = document.getElementById('tailorModalBody');
+            modalBody.innerHTML = `
+                <div>
+                    <div class="tailor-detail-image">
+                        <img src="${tailor.image}" alt="${tailor.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                    </div>
+                    <div class="tailor-stats">
+                        <div class="tailor-stat">
+                            <div class="tailor-stat-value">${tailor.rating}/5</div>
+                            <div class="tailor-stat-label">Rating</div>
+                        </div>
+                        <div class="tailor-stat">
+                            <div class="tailor-stat-value">${tailor.experience}</div>
+                            <div class="tailor-stat-label">Experience</div>
+                        </div>
+                        <div class="tailor-stat">
+                            <div class="tailor-stat-value">${tailor.completedProjects || '100+'}</div>
+                            <div class="tailor-stat-label">Projects</div>
+                        </div>
+                        <div class="tailor-stat">
+                            <div class="tailor-stat-value">${tailor.responseTime || '8 hours'}</div>
+                            <div class="tailor-stat-label">Avg. Response</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tailor-details">
+                    <h3>${tailor.name}</h3>
+                    <p><strong>Owner:</strong> ${tailor.owner || 'Not specified'}</p>
+                    <p><strong>Location:</strong> ${tailor.location}</p>
+                    <p><strong>Tier:</strong> <span class="tier-badge" style="background: ${getTierColor(tailor.tier)};">${tailor.tier}</span></p>
+                    <p><strong>Specialty:</strong> ${tailor.specialty}</p>
+                    <p><strong>Price Range:</strong> ${tailor.priceRange}</p>
+                    
+                    <div style="margin: 1.5rem 0;">
+                        <h4>About</h4>
+                        <p>${tailor.detailedBio || tailor.bio || 'No detailed description available.'}</p>
+                    </div>
+                    
+                    ${tailor.fabricSpecialties ? `
+                    <div style="margin: 1.5rem 0;">
+                        <h4>Fabric Specialties</h4>
+                        <div class="tailor-specialties">
+                            ${tailor.fabricSpecialties.map(fabric => `
+                                <span class="specialty-tag">${fabric}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </button>
+                </div>
+            `;
+            
+            tailorModal.style.display = 'flex';
+        }
+
+        // Error modal function
+        function showErrorModal(message) {
+            document.getElementById('tailorModalTitle').textContent = 'Error';
+            
+            const modalBody = document.getElementById('tailorModalBody');
+            modalBody.innerHTML = `
+                <div style="text-align: center; padding: 2rem; grid-column: 1 / -1;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--danger); margin-bottom: 1rem;"></i>
+                    <h3 style="color: var(--dark); margin-bottom: 1rem;">Unable to Load Tailor Details</h3>
+                    <p style="color: var(--gray); margin-bottom: 2rem;">${message}</p>
+                    <button class="btn btn-primary" onclick="tailorModal.style.display='none'">
+                        Close
+                    </button>
+                </div>
+            `;
+            
+            tailorModal.style.display = 'flex';
+        }
+
+        // Update results info
+        function updateResultsInfo(count) {
+            document.getElementById('resultsInfo').textContent = `Showing ${count} tailors`;
+        }
+
+        // Setup pagination
+        function setupPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let paginationHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})"><i class="fas fa-chevron-left"></i></button>`;
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<button class="page-btn active">${i}</button>`;
+                } else {
+                    paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
+                }
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})"><i class="fas fa-chevron-right"></i></button>`;
+            }
+            
+            pagination.innerHTML = paginationHTML;
+        }
+
+        // Change page function
+        function changePage(page) {
+            currentPage = page;
+            loadTailorsForSearch();
+        }
+
+        // ========== UTILITY FUNCTIONS ==========
+        function getTierColor(tier) {
+            const colors = {
+                'Basic': '#6b7280',
+                'Intermediate': '#f59e0b', 
+                'Expert': '#10b981'
+            };
+            return colors[tier] || '#2563eb';
+        }
+
+        function showEmergencyTailors() {
+            showSearchPage();
+            document.getElementById('specialtyFilter').value = 'Emergency Services';
+            handleSearch();
+        }
+
+        function showTailorsForCustomization() {
+            showSearchPage();
+            document.getElementById('specialtyFilter').value = 'Designer Wear';
+            handleSearch();
+        }
+
+        // ========== CHATBOX FUNCTIONS ==========
+        function toggleChatbox() {
+            chatbox.classList.toggle('hidden');
+            const icon = document.getElementById('chatboxToggleIcon');
+            if (chatbox.classList.contains('hidden')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function selectOption(option) {
+            addMessage(option, 'user');
+            processChatStep(option);
+        }
+
+        function handleUserMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+            
+            addMessage(message, 'user');
+            chatInput.value = '';
+            processChatStep(message);
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            messageDiv.textContent = text;
+            chatboxBody.appendChild(messageDiv);
+            chatboxBody.scrollTop = chatboxBody.scrollHeight;
+        }
+
+        function addOptions(options) {
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'chat-options';
+            
+            options.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'chat-option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => {
+                    addMessage(option, 'user');
+                    processChatStep(option);
+                };
+                optionsDiv.appendChild(optionDiv);
+            });
+            
+            chatboxBody.appendChild(optionsDiv);
+            chatboxBody.scrollTop = chatboxBody.scrollHeight;
+        }
+
+        function processChatStep(userInput) {
+            switch(chatState.step) {
+                case 1:
+                    chatState.clothingType = userInput;
+                    addMessage(`Great! You're looking for ${userInput}. What's your budget range?`, 'bot');
+                    addOptions(['Budget (₹150-500)', 'Medium (₹300-900)', 'Premium (₹600-2200)', "I'm not sure"]);
+                    chatState.step = 2;
+                    break;
+                    
+                case 2:
+                    if (userInput.includes('Budget')) {
+                        chatState.budget = 'Basic';
+                    } else if (userInput.includes('Medium')) {
+                        chatState.budget = 'Intermediate';
+                    } else if (userInput.includes('Premium')) {
+                        chatState.budget = 'Expert';
+                    } else {
+                        chatState.budget = 'Any';
+                    }
+                    
+                    addMessage(`Understood. How soon do you need this ${chatState.clothingType.toLowerCase()}?`, 'bot');
+                    addOptions(['Within 3 days (urgent)', 'Within a week', 'Within 2 weeks', 'No specific deadline']);
+                    chatState.step = 3;
+                    break;
+                    
+                case 3:
+                    if (userInput.includes('3 days')) {
+                        chatState.urgency = 'urgent';
+                    } else if (userInput.includes('week')) {
+                        chatState.urgency = 'moderate';
+                    } else {
+                        chatState.urgency = 'flexible';
+                    }
+                    
+                    addMessage(`Thanks! Which city are you in?`, 'bot');
+                    addOptions(['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Other']);
+                    chatState.step = 4;
+                    break;
+                    
+                case 4:
+                    chatState.location = userInput;
+                    addMessage(`Perfect! Based on your preferences, I'm finding the best tailors for you...`, 'bot');
+                    
+                    // Simulate search delay
+                    setTimeout(() => {
+                        recommendTailors();
+                    }, 1500);
+                    
+                    chatState.step = 5;
+                    break;
+                    
+                case 5:
+                    // Reset chat for new search
+                    if (userInput.toLowerCase().includes('new search') || userInput.toLowerCase().includes('start over')) {
+                        resetChat();
+                    }
+                    break;
+            }
+        }
+
+        function recommendTailors() {
+            // In a real app, you would make an API call here
+            // For demo, we'll use a simple filter
+                           const allTailors = [
+    {
+        id: 1,
+        name: 'Expert Designers',
+        location: 'Indore',
+        rating: 5,
+        specialty: 'Designer Wear',
+        tier: 'Expert',
+        priceRange: '₹983 - ₹22156',
+        experience: '15 years',
+        bio: 'Premium designer wear with exquisite craftsmanship.',
+        image: './images/tailor1.jpeg'
+    },
+    {
+        id: 2,
+        name: 'Lady Shop',
+        location: 'Ahmedabad',
+        rating: 5,
+        specialty: 'Designer Wear',
+        tier: 'Expert',
+        priceRange: '₹8666 - ₹21450',
+        experience: '15 years',
+        bio: 'Specialized in ladies designer wear and traditional outfits.',
+        image: './images/tailor2.jpeg'
+    },
+    {
+        id: 3,
+        name: 'Modern Fashion',
+        location: 'Nagpur',
+        rating: 5,
+        specialty: 'Formal Wear',
+        tier: 'Expert',
+        priceRange: '₹694 - ₹21229',
+        experience: '21 years',
+        bio: 'Modern fashion with perfect fit for formal occasions.',
+        image: './images/tailor3.jpeg'
+    },
+    {
+        id: 4,
+        name: 'Quick Stitch Masters',
+        location: 'Mumbai',
+        rating: 4.3,
+        specialty: 'Emergency Services',
+        tier: 'Basic',
+        priceRange: '₹200 - ₹600',
+        experience: '5+ years',
+        bio: '24/7 emergency stitching and alteration services.',
+        image: './images/tailor4.jpeg'
+    },
+    {
+        id: 5,
+        name: 'Precision Tailors',
+        location: 'Chennai',
+        rating: 4.7,
+        specialty: 'Formal Wear',
+        tier: 'Intermediate',
+        priceRange: '₹400 - ₹1000',
+        experience: '12+ years',
+        bio: 'Perfect fit guaranteed for all formal and business wear.',
+        image: './images/tailor5.jpeg'
+    }
+];
+            
+            let recommended = allTailors.filter(tailor => {
+                // Match clothing type
+                if (chatState.clothingType && tailor.specialty !== chatState.clothingType) {
+                    return false;
+                }
+                
+                // Match budget
+                if (chatState.budget !== 'Any' && tailor.tier !== chatState.budget) {
+                    return false;
+                }
+                
+                // Match location if specified
+                if (chatState.location !== 'Other' && tailor.location !== chatState.location) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            // Sort by rating (highest first)
+            recommended.sort((a, b) => b.rating - a.rating);
+            
+            // Take top 3
+            recommended = recommended.slice(0, 3);
+            
+            if (recommended.length === 0) {
+                addMessage("I couldn't find any tailors matching all your criteria. Let's try expanding the search.", 'bot');
+                addOptions(['Expand search', 'Start over']);
+                return;
+            }
+            
+            addMessage(`I found ${recommended.length} excellent tailors for your ${chatState.clothingType.toLowerCase()} project:`, 'bot');
+            
+            const recommendedDiv = document.createElement('div');
+            recommendedDiv.className = 'recommended-tailors';
+            
+            recommended.forEach(tailor => {
+                const tailorDiv = document.createElement('div');
+                tailorDiv.style.marginBottom = '1rem';
+                tailorDiv.style.padding = '0.8rem';
+                tailorDiv.style.background = 'white';
+                tailorDiv.style.borderRadius = '10px';
+                tailorDiv.style.cursor = 'pointer';
+                tailorDiv.onclick = () => {
+                    openTailorModal(tailor.id);
+                    toggleChatbox();
+                };
+                
+                tailorDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #e2e8f0; display: flex; align-items: center; justify-content: center;">
+                            <img src="${tailor.image}" alt="${tailor.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                                <i class="fas fa-user-tie" style="font-size: 1rem;"></i>
+                            </div>
+                        </div>
+                        <h4 style="margin: 0; color: var(--dark);">${tailor.name}</h4>
+                    </div>
+                    <p style="margin: 0.2rem 0; font-size: 0.9rem; color: var(--gray);">
+                        <i class="fas fa-map-marker-alt"></i> ${tailor.location} | 
+                        <i class="fas fa-star" style="color: var(--warning);"></i> ${tailor.rating}/5 | 
+                        <i class="fas fa-rupee-sign"></i> ${tailor.priceRange}
+                    </p>
+                    <p style="margin: 0.2rem 0; font-size: 0.8rem; color: var(--gray);">${tailor.specialty}</p>
+                `;
+                
+                recommendedDiv.appendChild(tailorDiv);
+            });
+            
+            chatboxBody.appendChild(recommendedDiv);
+            
+            addMessage(`Click on any tailor to view their full profile and book an appointment. Would you like to start a new search?`, 'bot');
+            addOptions(['New search', 'Close chat']);
+        }
+
+        function resetChat() {
+            chatState = {
+                step: 1,
+                clothingType: '',
+                budget: '',
+                urgency: '',
+                location: ''
+            };
+            
+            chatboxBody.innerHTML = '';
+            addMessage(`Hello! I'm your Tailor Match Assistant. I'll help you find the perfect tailor for your needs. What type of clothing are you looking to get stitched?`, 'bot');
+            addOptions(['Traditional Wear', 'Western Wear', 'Bridal Wear', 'Casual Wear', 'Formal Wear', 'Designer Wear']);
+        }
+
+        // ========== HEADER SCROLL EFFECT ==========
+        function handleHeaderScroll() {
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        }
+
+        function initAnimations() {
+            // Add animation on scroll
+            window.addEventListener('scroll', function() {
+                const elements = document.querySelectorAll('.feature-card, .step, .tier-card, .testimonial-card, .tailor-card');
+                
+                elements.forEach(element => {
+                    const position = element.getBoundingClientRect();
+                    
+                    // If element is in viewport
+                    if(position.top < window.innerHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            // Initialize elements with hidden state
+            const elements = document.querySelectorAll('.feature-card, .step, .tier-card, .testimonial-card, .tailor-card');
+            
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Trigger scroll event to check initial positions
+            window.dispatchEvent(new Event('scroll'));
+            
+            // Mobile Menu Toggle
+            document.querySelector('.mobile-menu').addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                const navButtons = document.querySelector('.nav-buttons');
+                
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.display = 'none';
+                    navButtons.style.display = 'none';
+                } else {
+                    navLinks.style.display = 'flex';
+                    navButtons.style.display = 'flex';
+                    
+                    // Make them responsive
+                    if (window.innerWidth <= 768) {
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '100%';
+                        navLinks.style.left = '0';
+                        navLinks.style.width = '100%';
+                        navLinks.style.background = 'white';
+                        navLinks.style.padding = '1rem';
+                        navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                        
+                        navButtons.style.flexDirection = 'column';
+                        navButtons.style.position = 'absolute';
+                        navButtons.style.top = 'calc(100% + 180px)';
+                        navButtons.style.left = '0';
+                        navButtons.style.width = '100%';
+                        navButtons.style.background = 'white';
+                        navButtons.style.padding = '1rem';
+                        navButtons.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                    }
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
